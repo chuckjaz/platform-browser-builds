@@ -3174,7 +3174,12 @@
        */
       DomRenderer.prototype.animate = function (element, startingStyles, keyframes, duration, delay, easing, previousPlayers) {
           if (previousPlayers === void 0) { previousPlayers = []; }
-          return this._animationDriver.animate(element, startingStyles, keyframes, duration, delay, easing, previousPlayers);
+          try {
+              return this._animationDriver.animate(element, startingStyles, keyframes, duration, delay, easing, previousPlayers);
+          }
+          catch (e) {
+              return new NoOpAnimationPlayer();
+          }
       };
       return DomRenderer;
   }());
